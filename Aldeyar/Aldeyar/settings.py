@@ -56,7 +56,7 @@ ROOT_URLCONF = 'Aldeyar.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'temeplates'],
+        'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -122,6 +122,6 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
-LOGIN_REDIRECT_URL = 'dasboard'
+LOGIN_REDIRECT_URL = 'dashboard'
 LOGIN_URL =''
 LOGOUT_REDIRECT_URL = 'login'

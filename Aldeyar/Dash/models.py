@@ -1,4 +1,6 @@
 from django.db import models
+from django.contrib.auth.models import User
+from django.urls import reverse
 
 class Bread(models.Model):
     package = models.CharField(max_length=200, null=True, blank=True)
@@ -97,17 +99,21 @@ class Staff_Salary(models.Model):
               ('May', 'May'), ('June', 'June'), ('July', 'July'), ('August', 'August'), ('September', 'September'),
               ('October', 'October'), ('November', 'November'), ('December', 'December'))
 
-    name = models.CharField(max_length=300, null=True, blank=True)
-    salary = models.DecimalField(max_digits=8, decimal_places=3, null=True, blank=True)
-    month  = models.CharField(max_length=150, null=True, blank=True, choices=months)
-    Pay  = models.DecimalField(max_digits=8, decimal_places=3)
-    date = models.DateTimeField(auto_now=False, auto_now_add=True)
+    pay_by  = models.ForeignKey(User, on_delete=models.DO_NOTHING)
+    name    = models.CharField(max_length=300, null=True, blank=True)
+    salary  = models.DecimalField(max_digits=8, decimal_places=3, null=True, blank=True)
+    month   = models.CharField(max_length=150, null=True, blank=True, choices=months)
+    Pay     = models.DecimalField(max_digits=8, decimal_places=3)
+    date    = models.DateTimeField(auto_now=False, auto_now_add=True)
 
     class Meta:
         verbose_name_plural = "Staff Salary"
     
     def __str__(self):
         return self.name + " - " + self.month
+    
+    def get_absolute_url(self):
+        return reverse('salary')
 
 class Rent(models.Model):
     option = (('Shop', 'Shop'), ('Room', 'Room'))
