@@ -70,28 +70,34 @@ class Expenses(models.Model):
     options = (('Piece', 'Piece'),('KG', 'KG'),('Liter', 'Liter'),('Gallon', ' Gallon'), ('Package', 'Package'))
     name = models.CharField(max_length=300, null=True, blank=True)
     quantity = models.SmallIntegerField()
-    unit_type = models.CharField(max_length=150, null=True, blank=True, choices=options)
+    unit_type = models.CharField(max_length=150, null=True, blank=True, default="Piece", choices=options)
     Unit_price = models.DecimalField(max_digits=8, decimal_places=3)
     totol_price = models.DecimalField(max_digits=8, decimal_places=3)
     date = models.DateTimeField(auto_now=False, auto_now_add=True)
-
+    user = models.ForeignKey(User, on_delete=models.DO_NOTHING)
     class Meta:
         verbose_name_plural = "Expenses"
     
     def __str__(self):
         return self.name
+    
+    def get_absolute_url(self):
+        return reverse('expense')
 
 # what the store member eat
 class Staff_Expenses(models.Model):
     name = models.CharField(max_length=300, null=True, blank=True)
     totol_price = models.DecimalField(max_digits=8, decimal_places=3)
     date = models.DateTimeField(auto_now=False, auto_now_add=True)
-
+    user = models.ForeignKey(User, on_delete=models.DO_NOTHING)
     class Meta:
         verbose_name_plural = "Staff Expenses"
     
     def __str__(self):
         return self.name
+    
+    def get_absolute_url(self):
+        return reverse('staff_expense')
 
 # what the store member eat
 class Staff_Salary(models.Model):
@@ -124,9 +130,13 @@ class Rent(models.Model):
     month = models.CharField(max_length=150, null=True, blank=True, choices=months)
     Pay  = models.DecimalField(max_digits=8, decimal_places=3)
     date = models.DateTimeField(auto_now=False, auto_now_add=True)
-    
+    user = models.ForeignKey(User, on_delete=models.DO_NOTHING)
+
     class Meta:
         verbose_name_plural = "Rent"
     
     def __str__(self):
         return self.rent + " - " + self.month
+    
+    def get_absolute_url(self):
+        return reverse('rent')

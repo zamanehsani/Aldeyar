@@ -39,7 +39,7 @@
                 <table id="example1" class="table table-bordered table-striped">
                   <thead class="bg-secondary">
                     <tr>
-                      <th>ID</th>
+                     
                       <th> Employee Name</th>
                       <th>Salary</th>
                       <th>Month</th>
@@ -52,7 +52,7 @@
                   <tbody>
                     {% for salary in object_list  %}
                       <tr>
-                        <td>{{salary.id}}</td>
+                       
                         <td>{{salary.name}}</td>
                         <td>{{salary.salary}}</td>
                         <td>{{salary.month}}</td>
@@ -60,8 +60,8 @@
                         <td>{{salary.date}}</td>
                         <td>{{salary.pay_by}}</td>
                         <td class="text-center"> 
-                          <a href="{% url 'update_salary' salary.id %}" class=" mr-3 pt-0 pb-0"><i class="fas fa-edit"></i></a> 
-                          <a href="{% url 'delete_salary' salary.id %}" class="pt-0 pb-0"><i class="fas fa-trash"></i></a>
+                          <a href="{% url 'update_salary' salary.id %}" class=" mr-3 pt-0 pb-0" title="make changes to this paymenet"><i class="fas fa-edit"></i></a> 
+                          <a href="{% url 'delete_salary' salary.id %}" class="pt-0 pb-0 text-danger" title="Remove this payment. Only the person made the payment can remove it"><i class="fas fa-trash"></i></a>
                         </td>
                       </tr>
                   {% endfor %}
@@ -146,7 +146,7 @@
                   </tbody>
                   <tfoot class="bg-secondary">
                   <tr>
-                    <th>ID</th>
+                 
                     <th> Employee Name</th>
                     <th>Salary</th>
                     <th>Month</th>
