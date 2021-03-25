@@ -52,10 +52,9 @@
           <img src="{% static 'dist/img/user2-160x160.jpg' %}" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a href="{% url 'profile' %}" class="d-block">{{user}}</a>
+          <a href="{% url 'profile' pk=user.id %}" class="d-block">{{user.get_full_name|default:user.username|title}}</a>
         </div>
       </div>
-
       <!-- SidebarSearch Form -->
       <div class="form-inline">
         <div class="input-group" data-widget="sidebar-search">
@@ -80,10 +79,15 @@
               <p> Dashboard</p>
             </a>
           </li>
-          <li class="nav-item">
-            <a href="#" class="nav-link">
+          <!-- <li class="nav-item">
+            <a href="" class="nav-link">
               <i class="nav-icon fas fa-user"></i>
               <p> Profile </p></a>
+          </li> -->
+          <li class="nav-item">
+            <a href="{% url 'sale' %}" class="nav-link">
+              <i class="nav-icon fas fa-shopping-basket "></i>
+              <p> Sales </p></a>
           </li>
           <li class="nav-item">
             <a href="{% url 'salary' %}" class="nav-link">
@@ -107,6 +111,12 @@
             <a href="{% url 'rent' %}" class="nav-link">
               <i class="nav-icon fas fa-hand-holding-usd"></i>
               <p>  Rent </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{% url 'bread' %}" class="nav-link">
+              <i class="nav-icon fas fa-cookie-bite"></i>
+              <p>  Bread Pack </p>
             </a>
           </li>
         </ul>

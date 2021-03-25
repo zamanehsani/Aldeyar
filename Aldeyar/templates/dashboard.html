@@ -33,14 +33,13 @@
             <!-- small box -->
             <div class="small-box bg-info">
               <div class="inner">
-                <h3>150</h3>
-
-                <p>New Orders</p>
+                <h3>Sales</h3>
+                <p>sold breads</p>
               </div>
               <div class="icon">
                 <i class="ion ion-bag"></i>
               </div>
-              <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+              <a href="{% url 'sale' %}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
             </div>
           </div>
           <!-- ./col -->
@@ -64,7 +63,6 @@
             <div class="small-box bg-warning">
               <div class="inner">
                 <h3>Rent</h3>
-                
                 <p>Monthly Rent</p>
               </div>
               <div class="icon">
@@ -104,6 +102,19 @@
               </div>
             </div>
             <!-- ./col -->
+            <div class="col-lg-3 col-6">
+              <!-- small box -->
+              <div class="small-box bg-primary">
+                <div class="inner">
+                  <h3>Bread</h3>
+                  <p>Packages of bread</p>
+                </div>
+                <div class="icon">
+                  <i class="ion ion-pizza"></i>
+                </div>
+                <a href="{% url 'bread' %}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+              </div>
+            </div>
         </div>
         <!-- /.row -->
         <!-- Main row -->

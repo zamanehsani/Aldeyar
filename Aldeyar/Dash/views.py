@@ -3,6 +3,8 @@ from django.contrib.auth.forms import UserCreationForm
 from django.views.generic import (ListView, DetailView, CreateView, UpdateView, DeleteView)
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from Dash import models
+from django.contrib.auth.models import User
+from Dash.forms import UserUpdate
 
 
 def index(request):
@@ -12,8 +14,29 @@ def index(request):
 def dashboard(request):
     return render(request, 'dashboard.html')
 
-def profile(request):
-    return render(request, 'profile.html')
+class Profile(DetailView):
+    model = User
+    template_name = 'profile.html'
+
+    def post(self, request, pk):
+        user = User.objects.get(pk = request.user.id)
+        form = UserUpdate(request.POST, instance=user)
+        if form.is_valid():
+            form.save()
+            
+            return redirect('profile', pk=user.id)
+        return redirect('profile', pk=user.id)
+
+class Update_profile(LoginRequiredMixin,UpdateView):
+    login_url = '/login'
+    model = User
+    template_name = 'user_form.html'
+    fields = ['first_name', 'last_name', 'email','username']
+    success_url = ''
+    def get_context_data(self, *args, **kwargs):
+        data = super(Update_profile, self).get_context_data(*args, **kwargs)
+        data['page_title'] = 'Update Profile'
+        return data
 
 def register(request):
     if request.method == "POST":
@@ -29,7 +52,111 @@ def register(request):
 
     return render(request,'register.html', data)
 
-# the staff expenses, 
+# Sales
+class Sale(LoginRequiredMixin, ListView):
+    login_url = '/login'
+    model = models.Sale
+    template_name = "sale.html"
+
+    def get_context_data(self, *args, **kwargs):
+        data = super(Sale, self).get_context_data(*args, **kwargs)
+        data['page_title'] = 'Sales'
+        return data
+
+class Add_sale(LoginRequiredMixin, CreateView):
+    login_url = '/login'
+    model = models.Sale
+    template_name = 'sale_form.html'
+    fields = ['bread', 'quantity', 'cleint']
+
+    def get_context_data(self, *args, **kwargs):
+        data = super(Add_sale, self).get_context_data(*args, **kwargs)
+        data['page_title'] = 'Sales From'
+        return data
+    
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super().form_valid(form)
+
+class Update_sale(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
+    login_url = '/login'
+    model = models.Sale
+    template_name = 'sale_form.html'
+    fields = ['bread', 'quantity', 'cleint']
+
+    def get_context_data(self, *args, **kwargs):
+        data = super(Update_sale, self).get_context_data(*args, **kwargs)
+        data['page_title'] = 'Sales'
+        return data
+
+    def test_func(self):
+        expense = self.get_object()
+        if self.request.user == expense.user:
+            return True
+        return False
+
+class Delete_sale(LoginRequiredMixin,UserPassesTestMixin, DeleteView):
+    model = models.Sale
+    template_name = "delete_sale.html"
+    success_url = '/sale'
+
+    def get_context_data(self, *args, **kwargs):
+        data = super(Delete_sale, self).get_context_data(*args, **kwargs)
+        data['page_title'] = 'Sales'
+        return data
+    
+    def test_func(self):
+        expense = self.get_object()
+        if self.request.user == expense.user:
+            return True
+        return False
+
+
+# Bread
+class Bread(LoginRequiredMixin, ListView):
+    login_url = '/login'
+    model = models.Bread
+    template_name = "bread.html"
+
+    def get_context_data(self, *args, **kwargs):
+        data = super(Bread, self).get_context_data(*args, **kwargs)
+        data['page_title'] = 'Bread Pack'
+        return data
+
+class Add_bread(LoginRequiredMixin, CreateView):
+    login_url = '/login'
+    model = models.Bread
+    template_name = 'bread_form.html'
+    fields = ['package', 'price']
+
+    def get_context_data(self, *args, **kwargs):
+        data = super(Add_bread, self).get_context_data(*args, **kwargs)
+        data['page_title'] = 'Bread From'
+        return data
+
+class Update_bread(LoginRequiredMixin, UpdateView):
+    login_url = '/login'
+    model = models.Bread
+    template_name = 'bread_form.html'
+    fields = ['package', 'price']
+
+    def get_context_data(self, *args, **kwargs):
+        data = super(Update_bread, self).get_context_data(*args, **kwargs)
+        data['page_title'] = 'Bread'
+        return data
+    
+
+class Delete_bread(LoginRequiredMixin, DeleteView):
+    model = models.Bread
+    template_name = "delete_bread.html"
+    success_url = '/bread'
+
+    def get_context_data(self, *args, **kwargs):
+        data = super(Delete_bread, self).get_context_data(*args, **kwargs)
+        data['page_title'] = 'Bread'
+        return data
+
+# the Rent, 
 class Rent(LoginRequiredMixin, ListView):
     login_url = '/login'
     model = models.Rent
