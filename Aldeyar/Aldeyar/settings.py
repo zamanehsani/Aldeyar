@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'Dash.apps.DashConfig',
     'crispy_forms',
+    'storages',
 ]
 
 MIDDLEWARE = [
@@ -125,6 +126,20 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 DEFAULT_FROM_EMAIL = 'Aldeyar Bakery'
 
+
+# from botocore.client import Config
+AWS_ACCESS_KEY_ID = 'AKIATW65PWY2CRQOC3FK'
+AWS_SECRET_ACCESS_KEY = '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'
+AWS_STORAGE_BUCKET_NAME = 'aldeyarbakery'
+
+# config=Config(signature_version='s3v4')
+
+# this was the error case.
+AWS_S3_REGION_NAME = "ap-south-1"
+# Asia Pacific (Mumbai) ap-south-1
+DEFAULT_FILE_STORAGE  = 'storages.backends.s3boto3.S3Boto3Storage'
+AWS_DEFAULT_ACL       = None
+AWS_S3_FILE_OVERWRITE = False
 
 
 # Static files (CSS, JavaScript, Images)

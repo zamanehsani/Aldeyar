@@ -2,6 +2,8 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.urls import reverse
 from PIL import Image
+from django.core.files.storage import default_storage as storage
+
 def upload_location(instance, filename):
     return '{0}/profiles/{1}'.format(instance.user.username, filename)
 
@@ -12,15 +14,14 @@ class Profile(models.Model):
     address = models.CharField("where do you live?",max_length=500,null=True, blank=True)
     photo = models.ImageField("Upload a square picture of yourself.",default='default.png', upload_to = upload_location, null=True, blank=True)
 
-
-    def save(self, *args, **kwargs):
-        super().save()
-        img = Image.open(self.photo.path)
-        if img.height > 400 or img.width > 400:
-            output_size = (400,400)
-            img.thumbnail(output_size)
-            img.save(self.photo.path)
-            print("your photo was large, so we resized and saved")
+    # def save(self, *args, **kwargs):
+    #     super().save(*args, **kwargs)
+    #     img = Image.open(self.photo.path)
+    #     if img.height > 400 or img.width > 400:
+    #         output_size = (400,400)
+    #         img.thumbnail(output_size)
+    #         img.save(user.photo.path)
+    #         print("your photo was large, so we resized and saved")
 
     def __str__(self):
         return self.user.username
