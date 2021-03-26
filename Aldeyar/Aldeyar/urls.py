@@ -1,8 +1,11 @@
 
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, reverse_lazy
 from Dash import views as dash_view
 from django.contrib.auth import views as auth_views
+from django.conf import settings
+from django.conf.urls.static import static
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -10,6 +13,29 @@ urlpatterns = [
     path('dashboard', dash_view.dashboard, name='dashboard'),
     path('login', auth_views.LoginView.as_view(template_name="login.html"), name="login"),
     path('logout', auth_views.LogoutView.as_view(template_name="index.html"), name="logout"),
+    # password reset
+    path('password-reset', 
+        auth_views.PasswordResetView.as_view(template_name="password_reset.html"), 
+        name="password_reset"),
+
+    path('password-reset-done', 
+        auth_views.PasswordResetDoneView.as_view(template_name="password_reset_done.html"), 
+        name="password_reset_done"),
+
+    path('password-reset-confirm/<uidb64>/<token>', 
+        auth_views.PasswordResetConfirmView.as_view(template_name="password_reset_confirm.html", success_url=reverse_lazy('password_has_reset')), 
+        name="password_reset_confirm"),
+    
+    # this is view is not some how not loading. so the connfirm path with redireect to pass done function
+    path('password-reset-complete', 
+        auth_views.PasswordResetCompleteView.as_view(template_name="password_complete.html"), 
+        name="password_reset_complete"),
+    
+    # after the password redirect (this function as the password reset complete page)
+    path('password-has-reset', 
+        auth_views.PasswordResetDoneView.as_view(template_name="password_complete.html"), 
+        name="password_has_reset"),
+
     # profile
     path('profile/<int:pk>', dash_view.Profile.as_view(), name="profile"),
     path('profile/<int:pk>/u/pdate', dash_view.Update_profile.as_view(), name="update_profile"),
@@ -46,3 +72,6 @@ urlpatterns = [
     path('sale/<int:pk>/update', dash_view.Update_sale.as_view(), name="update_sale"),
     path('sale/<int:pk>/delete', dash_view.Delete_sale.as_view(), name="delete_sale"),
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

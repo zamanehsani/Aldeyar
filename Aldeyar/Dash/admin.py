@@ -10,4 +10,5 @@ admin.site.register(models.Staff_Expenses)
 admin.site.register(models.Expenses)
 admin.site.register(models.Staff_Salary)
 admin.site.register(models.Rent)
+admin.site.register(models.Profile)
 # Register your models here.

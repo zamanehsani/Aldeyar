@@ -4,7 +4,7 @@ from django.views.generic import (ListView, DetailView, CreateView, UpdateView, 
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from Dash import models
 from django.contrib.auth.models import User
-from Dash.forms import UserUpdate
+from Dash.forms import UserUpdate, UserProfile
 
 
 def index(request):
@@ -20,10 +20,12 @@ class Profile(DetailView):
 
     def post(self, request, pk):
         user = User.objects.get(pk = request.user.id)
-        form = UserUpdate(request.POST, instance=user)
-        if form.is_valid():
-            form.save()
-            
+        u_form = UserUpdate(request.POST, instance=user)
+        p_form = UserProfile(request.POST, request.FILES, instance=user.profile)
+        if u_form.is_valid() and p_form.is_valid():
+            u_form.save()
+            p_form.save()
+            print("forms has been updated and saved")
             return redirect('profile', pk=user.id)
         return redirect('profile', pk=user.id)
 
