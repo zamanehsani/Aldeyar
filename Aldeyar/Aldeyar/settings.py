@@ -77,24 +77,24 @@ WSGI_APPLICATION = 'Aldeyar.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
-
-## this is the aws db. it works fine with local and not with heroku . heroku loads the app but the db connect fails. 
 # DATABASES = {
 #     'default': {
-#         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': 'aldeyar',
-#         'USER': 'aldeyarbakkery',
-#         'PASSWORD': 'Z123123z',
-#         'HOST':'database-2.csihyjmdypb9.ap-south-1.rds.amazonaws.com',
-#         'PORT': '5432',
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
 #     }
 # }
+
+# this is the aws db. it works fine with local and not with heroku . heroku loads the app but the db connect fails. 
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'aldeyar',
+        'USER': 'aldeyarbakkery',
+        'PASSWORD': 'Z123123z',
+        'HOST':'database-2.csihyjmdypb9.ap-south-1.rds.amazonaws.com',
+        'PORT': '5432',
+    }
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
