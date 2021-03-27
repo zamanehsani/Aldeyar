@@ -9,9 +9,9 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', dash_view.index, name='index'),
+    path('lockscreen', dash_view.index, name='index'),
     path('dashboard', dash_view.dashboard, name='dashboard'),
-    path('login', auth_views.LoginView.as_view(template_name="login.html"), name="login"),
+    path('', auth_views.LoginView.as_view(template_name="login.html"), name="login"),
     path('logout', auth_views.LogoutView.as_view(template_name="index.html"), name="logout"),
     # password reset
     path('password-reset', 

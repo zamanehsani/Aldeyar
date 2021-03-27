@@ -6,9 +6,8 @@ from Dash import models
 from django.contrib.auth.models import User
 from Dash.forms import UserUpdate, UserProfile
 
-
 def index(request):
-    return render(request,'index.html')
+    return render(request,'lockscreen.html')
 # Create your views here.
 
 def dashboard(request):

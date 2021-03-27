@@ -6,7 +6,6 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>AlDeyar Bakery | Login</title>
-
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
   <!-- Font Awesome -->
@@ -24,7 +23,7 @@
       <a href="{% url 'index' %}" class="h1"><b>AlDeyar </b>Bakery</a>
     </div>
     <div class="card-body">
-      <p class="login-box-msg">Sign in to start your session</p>
+      <p class="login-box-msg">Sign in to your account</p>
       <form action="" method="post"> {% csrf_token  %}
         {{ form|crispy  }}
         <!-- <div class="input-group mb-3">
