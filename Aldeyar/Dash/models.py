@@ -5,7 +5,7 @@ from PIL import Image
 from django.core.files.storage import default_storage as storage
 
 def upload_location(instance, filename):
-    return '{0}/profiles/{1}'.format(instance.user.username, filename)
+    return 'profiles/{0}/{1}'.format(instance.user.username, filename)
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
