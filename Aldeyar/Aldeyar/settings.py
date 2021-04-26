@@ -25,7 +25,7 @@ SECRET_KEY = '6#_=l2_k5eza(7vlh*%rrn(+w06rxupgahiy)2yh+8=gxk9cta'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['192.168.0.141', 'aldeyar.herokuapp.com', 'aldeyar.com']
+ALLOWED_HOSTS = ['192.168.0.142', 'aldeyar.herokuapp.com', 'aldeyar.com']
 
 
 # Application definition
@@ -84,14 +84,13 @@ WSGI_APPLICATION = 'Aldeyar.wsgi.application'
 #     }
 # }
 
-# this is the aws db. it works fine with local and not with heroku . heroku loads the app but the db connect fails. 
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'aldeyar',
         'USER': 'aldeyarbakkery',
         'PASSWORD': 'Z123123z',
-        'HOST':'database-2.csihyjmdypb9.ap-south-1.rds.amazonaws.com',
+        'HOST':'aldeyar.csihyjmdypb9.ap-south-1.rds.amazonaws.com',
         'PORT': '5432',
     }
 }
