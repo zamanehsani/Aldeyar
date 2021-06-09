@@ -25,7 +25,7 @@ SECRET_KEY = '6#_=l2_k5eza(7vlh*%rrn(+w06rxupgahiy)2yh+8=gxk9cta'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['192.168.0.142', 'aldeyar.herokuapp.com', 'aldeyar.com','aldeyar-test.herokuapp.com']
+ALLOWED_HOSTS = ['192.168.0.142', 'aldeyar.herokuapp.com', '127.0.0.1','aldeyar-test.herokuapp.com']
 
 
 # Application definition
