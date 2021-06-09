@@ -87,10 +87,10 @@ WSGI_APPLICATION = 'Aldeyar.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'aldeyar',
-        'USER': 'aldeyarbakkery',
+        'NAME': 'aldeyar_test',
+        'USER': 'postgres',
         'PASSWORD': 'Z123123z',
-        'HOST':'aldeyar.csihyjmdypb9.ap-south-1.rds.amazonaws.com',
+        'HOST':'aldeyar-test.ch3incigevrs.ap-south-1.rds.amazonaws.com',
         'PORT': '5432',
     }
 }
